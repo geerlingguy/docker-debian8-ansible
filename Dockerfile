@@ -1,16 +1,16 @@
-FROM debian:jessie-backports
+FROM debian:jessie
 MAINTAINER Jeff Geerling
 
 ENV DEBIAN_FRONTEND noninteractive
 
-# Install Ansible via backports.
+# Install Ansible via pip.
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-       --default-release jessie-backports \
-       ansible \
+       build-essential libffi-dev libssl-dev python-pip python-dev \
     && rm -rf /var/lib/apt/lists/* \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean
+RUN pip install ansible
 
 COPY initctl_faker .
 RUN chmod +x initctl_faker && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl
