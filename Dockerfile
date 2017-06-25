@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER Jeff Geerling
+LABEL maintainer="Jeff Geerling"
 
 ENV DEBIAN_FRONTEND noninteractive
 
