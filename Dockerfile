@@ -13,7 +13,7 @@ RUN apt-get update \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean
 
-ENV pip_packages "wheel cryptography ansible"
+ENV pip_packages "wheel cryptography ansible yamllint ansible-lint flake8 testinfra molecule"
 
 # Install Ansible via pip.
 RUN pip install --upgrade pip setuptools \
