@@ -3,8 +3,6 @@ LABEL maintainer="Jeff Geerling"
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV pip_packages "ansible"
-
 # Install dependencies.
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -15,8 +13,10 @@ RUN apt-get update \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean
 
+ENV pip_packages "wheel cryptography ansible"
+
 # Install Ansible via pip.
-RUN pip install --upgrade setuptools \
+RUN pip install --upgrade pip setuptools \
     && pip install $pip_packages
 
 COPY initctl_faker .
