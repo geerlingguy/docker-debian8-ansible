@@ -13,11 +13,13 @@ RUN apt-get update \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean
 
-ENV pip_packages "wheel cryptography ansible yamllint ansible-lint flake8 testinfra molecule"
+ENV pip_packages "wheel cryptography ansible"
+ENV pip_packages_test "yamllint ansible-lint flake8 testinfra molecule"
 
 # Install Ansible via pip.
 RUN pip install --upgrade pip setuptools \
-    && pip install $pip_packages
+    && pip install $pip_packages \
+    && pip install $pip_packages_test
 
 COPY initctl_faker .
 RUN chmod +x initctl_faker && rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl
